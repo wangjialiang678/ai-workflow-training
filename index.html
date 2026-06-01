@@ -1,0 +1,869 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 工作流训练营 | 从想法到可交付产品</title>
+  <meta name="description" content="给微光黑客松与超脑学员的 AI 工作流学习页：调研、需求澄清、Auto-Dev、Frontend Design、GStack、Superpowers。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23181715'/%3E%3Cpath d='M10 10h22v22H10z' fill='%23d84f36'/%3E%3Cpath d='M32 32h22v22H32z' fill='%23215fb8'/%3E%3Cpath d='M10 42h12v12H10z' fill='%23e4ad34'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --paper: #f7f3ea;
+      --paper-2: #fffdf7;
+      --ink: #181715;
+      --muted: #65605a;
+      --line: #d9d0c1;
+      --red: #d84f36;
+      --blue: #215fb8;
+      --green: #24724f;
+      --yellow: #e4ad34;
+      --panel: #ffffff;
+      --shadow: 0 20px 50px rgba(32, 28, 22, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(24, 23, 21, 0.035) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(24, 23, 21, 0.035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 32px 32px;
+      color: var(--ink);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.72;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid rgba(24, 23, 21, 0.12);
+      background: rgba(247, 243, 234, 0.92);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--ink);
+      background:
+        linear-gradient(135deg, var(--red) 0 48%, transparent 48% 52%, var(--blue) 52% 100%);
+      box-shadow: 4px 4px 0 var(--yellow);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav a {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px 10px;
+      white-space: nowrap;
+    }
+
+    .nav a:hover {
+      color: var(--ink);
+    }
+
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 78px 24px 56px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 54px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin: 0 0 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: clamp(42px, 7vw, 88px);
+      line-height: 0.98;
+      letter-spacing: 0;
+      font-weight: 950;
+    }
+
+    .hero-lede {
+      max-width: 640px;
+      margin: 26px 0 0;
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 22px);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      border: 2px solid var(--ink);
+      border-radius: 6px;
+      padding: 10px 16px;
+      background: var(--ink);
+      color: var(--paper-2);
+      font-weight: 850;
+      box-shadow: 5px 5px 0 rgba(24, 23, 21, 0.18);
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .button.secondary {
+      background: var(--paper-2);
+      color: var(--ink);
+    }
+
+    .button:hover,
+    .copy-btn:hover,
+    .resource-link:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 rgba(24, 23, 21, 0.2);
+    }
+
+    .workflow-board {
+      position: relative;
+      padding: 26px;
+      border: 2px solid var(--ink);
+      background: var(--paper-2);
+      box-shadow: 14px 14px 0 var(--ink);
+    }
+
+    .board-title {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .board-track {
+      display: grid;
+      gap: 12px;
+    }
+
+    .board-node {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 14px;
+      align-items: start;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 14px;
+    }
+
+    .node-num {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      color: #fff;
+      background: var(--ink);
+      font-weight: 900;
+    }
+
+    .board-node:nth-child(2) .node-num { background: var(--red); }
+    .board-node:nth-child(3) .node-num { background: var(--blue); }
+    .board-node:nth-child(4) .node-num { background: var(--green); }
+    .board-node:nth-child(5) .node-num { background: var(--yellow); color: var(--ink); }
+
+    .node-title {
+      margin: 0 0 2px;
+      font-weight: 900;
+    }
+
+    .node-copy {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 70px 24px;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(240px, 0.42fr);
+      gap: 36px;
+      align-items: end;
+      margin-bottom: 28px;
+      border-top: 3px solid var(--ink);
+      padding-top: 28px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .section-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .path-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .path-step {
+      min-height: 190px;
+      border: 2px solid var(--ink);
+      background: var(--paper-2);
+      padding: 18px;
+      box-shadow: 7px 7px 0 rgba(24, 23, 21, 0.1);
+    }
+
+    .path-kicker {
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .path-step h3 {
+      margin: 14px 0 8px;
+      font-size: 22px;
+      line-height: 1.18;
+    }
+
+    .path-step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .module {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.36fr) minmax(0, 0.64fr);
+      gap: 30px;
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding: 34px 0;
+    }
+
+    .module-number {
+      display: inline-grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      background: var(--ink);
+      color: var(--paper-2);
+      font-weight: 950;
+      margin-bottom: 18px;
+    }
+
+    .module h3 {
+      margin: 0 0 12px;
+      font-size: clamp(26px, 3.3vw, 42px);
+      line-height: 1.06;
+    }
+
+    .module-summary {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .module-body {
+      display: grid;
+      gap: 18px;
+    }
+
+    .callout {
+      border-left: 5px solid var(--blue);
+      background: rgba(255, 255, 255, 0.68);
+      padding: 18px 20px;
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .bullet-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 24px;
+      color: var(--muted);
+    }
+
+    .bullet-list li::before {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 0;
+      width: 9px;
+      height: 9px;
+      background: var(--red);
+    }
+
+    .copy-row,
+    .resource-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    code,
+    .copy-text {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .copy-text {
+      display: block;
+      min-width: 0;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      background: var(--ink);
+      color: var(--paper-2);
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.6;
+      white-space: nowrap;
+    }
+
+    .copy-btn {
+      min-width: 86px;
+      border: 2px solid var(--ink);
+      border-radius: 6px;
+      background: var(--yellow);
+      color: var(--ink);
+      padding: 10px 12px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 4px 4px 0 rgba(24, 23, 21, 0.15);
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .copy-btn.copied {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .resource-card {
+      display: grid;
+      gap: 16px;
+      border: 2px solid var(--ink);
+      background: var(--panel);
+      padding: 20px;
+      box-shadow: 8px 8px 0 rgba(24, 23, 21, 0.1);
+    }
+
+    .resource-card h3 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.18;
+    }
+
+    .resource-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .resource-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--ink);
+      border-radius: 6px;
+      background: var(--paper-2);
+      padding: 10px 12px;
+      font-weight: 900;
+      box-shadow: 4px 4px 0 rgba(24, 23, 21, 0.14);
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .prompt-panel {
+      border: 2px solid var(--ink);
+      background: #fff;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .prompt-panel h3 {
+      margin: 0 0 12px;
+      font-size: 24px;
+    }
+
+    .prompt-text {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .footer {
+      margin-top: 50px;
+      padding: 34px 24px 42px;
+      border-top: 2px solid var(--ink);
+      background: var(--ink);
+      color: var(--paper-2);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      max-width: 1180px;
+      margin: 0 auto;
+      color: rgba(255, 253, 247, 0.76);
+      font-size: 14px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 40;
+      border: 2px solid var(--ink);
+      background: var(--green);
+      color: #fff;
+      padding: 12px 14px;
+      font-weight: 900;
+      box-shadow: 6px 6px 0 rgba(24, 23, 21, 0.18);
+      transform: translateY(120px);
+      opacity: 0;
+      transition: transform 180ms ease, opacity 180ms ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 940px) {
+      .hero,
+      .section-head,
+      .module {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 48px;
+      }
+
+      .path-grid,
+      .resource-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .workflow-board {
+        box-shadow: 9px 9px 0 var(--ink);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .hero,
+      .section {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .path-grid,
+      .resource-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .copy-row,
+      .resource-row {
+        grid-template-columns: 1fr;
+      }
+
+      .copy-btn {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: clamp(40px, 14vw, 58px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="回到顶部">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>AI Workflow Camp</span>
+      </a>
+      <nav class="nav" aria-label="页面导航">
+        <a href="#research">调研</a>
+        <a href="#clarify">需求澄清</a>
+        <a href="#autodev">Auto-Dev</a>
+        <a href="#frontend">Frontend Design</a>
+        <a href="#ecosystem">扩展工具</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">For Hackathon Builders</p>
+        <h1>把 AI 放进一条可靠的研发流程</h1>
+        <p class="hero-lede">这是一份给学员看的 AI 工作流地图：先调研，再澄清需求，然后进入闭环开发和前端设计，最后参考成熟的第三方工作流扩展自己的系统。</p>
+        <div class="hero-actions">
+          <a class="button" href="#learning-path">看学习顺序</a>
+          <a class="button secondary" href="#resources">复制安装链接</a>
+        </div>
+      </div>
+
+      <aside class="workflow-board" aria-label="AI 工作流视觉路线图">
+        <p class="board-title">Workshop route</p>
+        <div class="board-track">
+          <div class="board-node">
+            <span class="node-num">01</span>
+            <div>
+              <p class="node-title">Research first</p>
+              <p class="node-copy">先确认别人怎么做、有没有现成方案、风险在哪里。</p>
+            </div>
+          </div>
+          <div class="board-node">
+            <span class="node-num">02</span>
+            <div>
+              <p class="node-title">Clarify the idea</p>
+              <p class="node-copy">把一句想法追问成用户、场景、边界和验收标准。</p>
+            </div>
+          </div>
+          <div class="board-node">
+            <span class="node-num">03</span>
+            <div>
+              <p class="node-title">Build in a loop</p>
+              <p class="node-copy">从 PRD 到任务拆分、测试验证、失败修复。</p>
+            </div>
+          </div>
+          <div class="board-node">
+            <span class="node-num">04</span>
+            <div>
+              <p class="node-title">Design the surface</p>
+              <p class="node-copy">让界面有明确气质，而不是默认模板感。</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" id="learning-path" data-testid="learning-path">
+      <div class="section-head">
+        <h2>学员应该按这个顺序练</h2>
+        <p class="section-note">不要从“让 AI 写代码”开始。真正可复用的能力，是把想法变成证据、需求、实现和验证。</p>
+      </div>
+      <div class="path-grid">
+        <article class="path-step">
+          <span class="path-kicker">Step 1</span>
+          <h3>调研工作流</h3>
+          <p>先找现成方案和最佳实践，减少重复造轮子，也避免凭感觉选型。</p>
+        </article>
+        <article class="path-step">
+          <span class="path-kicker">Step 2</span>
+          <h3>需求澄清</h3>
+          <p>把模糊 idea 变成 PRD：用户、场景、边界、验收标准都要说清楚。</p>
+        </article>
+        <article class="path-step">
+          <span class="path-kicker">Step 3</span>
+          <h3>Auto-Dev</h3>
+          <p>用 PRD 驱动闭环开发：拆任务、并行实现、跑测试、失败后修复。</p>
+        </article>
+        <article class="path-step">
+          <span class="path-kicker">Step 4</span>
+          <h3>Frontend Design</h3>
+          <p>把产品界面做得能被人使用、愿意展示，而不是只停留在功能可用。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="modules">
+      <div class="section-head">
+        <h2>核心工作流</h2>
+        <p class="section-note">这里保留学员真正需要带走的内容：方法、适用场景、可复制命令和公开链接。</p>
+      </div>
+
+      <article class="module" id="research">
+        <div>
+          <span class="module-number">01</span>
+          <h3>调研工作流</h3>
+          <p class="module-summary">先查证据，再做设计。适合开源方案发现、技术选型、竞品和最佳实践调研。</p>
+        </div>
+        <div class="module-body">
+          <div class="callout">
+            <strong>课堂里你要记住的动作</strong>
+            先判断调研深度，再选择调研场景，最后把结论和来源沉淀下来。
+          </div>
+          <ul class="bullet-list">
+            <li>L1：快速确认一个事实或用法。</li>
+            <li>L2：比较方案、找 GitHub 项目、做技术评估。</li>
+            <li>L3：高风险决策，多方向并行调研。</li>
+          </ul>
+          <div class="resource-row">
+            <a class="resource-link" href="https://github.com/wangjialiang678/research-workflow-skill" target="_blank" rel="noreferrer">打开 GitHub</a>
+            <button class="copy-btn" data-copy="https://github.com/wangjialiang678/research-workflow-skill">Copy</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="module" id="clarify">
+        <div>
+          <span class="module-number">02</span>
+          <h3>需求澄清</h3>
+          <p class="module-summary">不要把一句 idea 直接交给 AI 写代码。先让 AI 追问，直到能产出 PRD 或技术说明。</p>
+        </div>
+        <div class="module-body">
+          <div class="callout">
+            <strong>一个可直接复制的提示词</strong>
+            你是我的产品合伙人。请不要直接给方案，先连续追问，帮我澄清目标用户、真实场景、核心问题、非目标、验收标准和技术约束；当信息足够后，再输出一版 PRD。
+          </div>
+          <ul class="bullet-list">
+            <li>适合黑客松：把“想做个工具”变成 24 小时内能交付的范围。</li>
+            <li>适合个人项目：先压缩需求，再决定是否进入开发。</li>
+            <li>可以和调研工作流配合：澄清后再查竞品、开源项目和实现路线。</li>
+          </ul>
+          <div class="copy-row">
+            <span class="copy-text">你是我的产品合伙人。请不要直接给方案，先连续追问，帮我澄清目标用户、真实场景、核心问题、非目标、验收标准和技术约束；当信息足够后，再输出一版 PRD。</span>
+            <button class="copy-btn" data-copy="你是我的产品合伙人。请不要直接给方案，先连续追问，帮我澄清目标用户、真实场景、核心问题、非目标、验收标准和技术约束；当信息足够后，再输出一版 PRD。">Copy</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="module" id="autodev">
+        <div>
+          <span class="module-number">03</span>
+          <h3>Auto-Dev</h3>
+          <p class="module-summary">把 PRD 交给工作流，而不是交给一句泛泛的“帮我实现”。它会拆任务、隔离开发、验证和修复。</p>
+        </div>
+        <div class="module-body">
+          <ul class="bullet-list">
+            <li>适合已有 PRD 的项目。</li>
+            <li>适合需要并行开发多个独立模块的任务。</li>
+            <li>适合现场演示“失败后自动修复”的闭环思路。</li>
+          </ul>
+          <div class="copy-row">
+            <span class="copy-text">/plugin marketplace add wangjialiang678/claude-auto-dev</span>
+            <button class="copy-btn" data-copy="/plugin marketplace add wangjialiang678/claude-auto-dev">Copy</button>
+          </div>
+          <div class="copy-row">
+            <span class="copy-text">/plugin install claude-auto-dev@claude-auto-dev</span>
+            <button class="copy-btn" data-copy="/plugin install claude-auto-dev@claude-auto-dev">Copy</button>
+          </div>
+          <div class="resource-row">
+            <a class="resource-link" href="https://github.com/wangjialiang678/claude-auto-dev" target="_blank" rel="noreferrer">打开 GitHub</a>
+            <button class="copy-btn" data-copy="https://github.com/wangjialiang678/claude-auto-dev">Copy</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="module" id="frontend">
+        <div>
+          <span class="module-number">04</span>
+          <h3>Frontend Design</h3>
+          <p class="module-summary">让 AI 在写页面前先选择明确的视觉方向，减少普通模板感，做出能展示的产品界面。</p>
+        </div>
+        <div class="module-body">
+          <ul class="bullet-list">
+            <li>适合做黑客松 Demo、落地页、Dashboard、工具界面。</li>
+            <li>重点不是“更花”，而是界面有清晰的对象、语气和信息层级。</li>
+            <li>建议先做一次无 skill 版本，再做一次加载 skill 的版本，对比差异。</li>
+          </ul>
+          <div class="copy-row">
+            <span class="copy-text">/plugin install frontend-design@claude-plugins-official</span>
+            <button class="copy-btn" data-copy="/plugin install frontend-design@claude-plugins-official">Copy</button>
+          </div>
+          <div class="resource-row">
+            <a class="resource-link" href="https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design" target="_blank" rel="noreferrer">官方插件</a>
+            <button class="copy-btn" data-copy="https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design">Copy</button>
+          </div>
+          <div class="resource-row">
+            <a class="resource-link" href="https://github.com/anthropics/claude-cookbooks/blob/main/coding/prompting_for_frontend_aesthetics.ipynb" target="_blank" rel="noreferrer">设计提示 Cookbook</a>
+            <button class="copy-btn" data-copy="https://github.com/anthropics/claude-cookbooks/blob/main/coding/prompting_for_frontend_aesthetics.ipynb">Copy</button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section" id="ecosystem">
+      <div class="section-head">
+        <h2>最后再看两个成熟工作流</h2>
+        <p class="section-note">它们不要求你马上全量使用，但很适合借鉴工程纪律和角色分工。</p>
+      </div>
+      <div class="resource-grid" id="resources" data-testid="resource-grid">
+        <article class="resource-card">
+          <h3>GStack</h3>
+          <p>把 AI 编程拆成虚拟工程团队：CEO、工程经理、设计师、QA、安全官、发布工程师。适合想建立完整产品交付流程的人。</p>
+          <a class="resource-link" href="https://github.com/garrytan/gstack" target="_blank" rel="noreferrer">打开 GitHub</a>
+          <button class="copy-btn" data-copy="https://github.com/garrytan/gstack">Copy</button>
+        </article>
+        <article class="resource-card">
+          <h3>Superpowers</h3>
+          <p>强调需求讨论、计划、TDD、系统性调试和完成前验证。适合想让 AI 更像严格工程协作者的人。</p>
+          <a class="resource-link" href="https://github.com/obra/superpowers" target="_blank" rel="noreferrer">打开 GitHub</a>
+          <button class="copy-btn" data-copy="https://github.com/obra/superpowers">Copy</button>
+          <div class="copy-row">
+            <span class="copy-text">/plugin install superpowers@claude-plugins-official</span>
+            <button class="copy-btn" data-copy="/plugin install superpowers@claude-plugins-official">Copy</button>
+          </div>
+        </article>
+        <article class="resource-card">
+          <h3>课上练习建议</h3>
+          <p>用一个黑客松项目 idea 开始：先调研，再澄清 PRD，再用 Auto-Dev 做最小闭环，最后用 Frontend Design 做一个能展示的界面。</p>
+          <div class="copy-row">
+            <span class="copy-text">我想做一个帮助黑客松团队在 24 小时内从想法到可演示产品的 AI 助手。请先调研类似方案，再追问我生成 PRD。</span>
+            <button class="copy-btn" data-copy="我想做一个帮助黑客松团队在 24 小时内从想法到可演示产品的 AI 助手。请先调研类似方案，再追问我生成 PRD。">Copy</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="prompt-panel">
+        <h3>一句话总结</h3>
+        <p class="prompt-text">AI 工作流不是把任务丢给模型，而是把模型放进一个有顺序、有证据、有验收标准的研发系统。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>AI Workflow Camp</span>
+      <span>Research -> Clarify -> Build -> Design -> Improve</span>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
+
+  <script>
+    const toast = document.getElementById("toast");
+    let toastTimer;
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      window.clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => {
+        toast.classList.remove("show");
+      }, 1500);
+    }
+
+    async function copyText(text, button) {
+      try {
+        await navigator.clipboard.writeText(text);
+        button.classList.add("copied");
+        const original = button.textContent;
+        button.textContent = "Copied";
+        showToast("已复制");
+        window.setTimeout(() => {
+          button.classList.remove("copied");
+          button.textContent = original;
+        }, 1200);
+      } catch (error) {
+        showToast("复制失败，请手动选择文本");
+      }
+    }
+
+    document.querySelectorAll("[data-copy]").forEach((button) => {
+      button.addEventListener("click", () => {
+        copyText(button.dataset.copy, button);
+      });
+    });
+  </script>
+</body>
+</html>
