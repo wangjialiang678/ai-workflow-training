@@ -33,8 +33,11 @@ for (const label of expectedOrder) {
 const requiredLinks = [
   "https://github.com/wangjialiang678/research-workflow-skill",
   "https://www.tavily.com/",
+  "https://app.tavily.com",
   "https://brave.com/search/api/",
+  "https://api-dashboard.search.brave.com",
   "https://exa.ai/",
+  "https://dashboard.exa.ai/api-keys",
   "https://cli.github.com/manual/gh_search_repos",
   "https://docs.github.com/en/search-github/searching-on-github/searching-for-repositories",
   "https://context7.com/",
@@ -101,5 +104,7 @@ for (const detail of forbiddenStudentFacingDetails) {
 assert(html.includes("navigator.clipboard.writeText"), "Copy buttons must use clipboard API");
 assert(html.includes('data-testid="learning-path"'), "Missing learning path landmark");
 assert(html.includes('data-testid="resource-grid"'), "Missing resource grid landmark");
+assert(html.includes("Tavily + Brave + Exa"), "Missing multi-source search recommendation");
+assert(html.includes("Brave LLM Context"), "Missing RAG source recommendation");
 
 console.log("Smoke test passed: student-facing training page content is valid.");

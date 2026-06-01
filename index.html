@@ -362,6 +362,32 @@
       margin-bottom: 4px;
     }
 
+    .mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .mini-table th,
+    .mini-table td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .mini-table th {
+      color: var(--ink);
+      font-weight: 900;
+      background: rgba(228, 173, 52, 0.14);
+    }
+
+    .mini-table tr:last-child td {
+      border-bottom: 0;
+    }
+
     .bullet-list {
       display: grid;
       gap: 10px;
@@ -733,6 +759,47 @@
             <li><a href="https://cli.github.com/manual/gh_search_repos" target="_blank" rel="noreferrer">GitHub CLI</a> / <a href="https://docs.github.com/en/search-github/searching-on-github/searching-for-repositories" target="_blank" rel="noreferrer">GitHub Search</a>：开源项目、Stars、维护状态、License。</li>
             <li><a href="https://context7.com/" target="_blank" rel="noreferrer">Context7</a> / <a href="https://gitmcp.io/" target="_blank" rel="noreferrer">GitMCP</a>：官方文档、库用法和版本差异。</li>
             <li><a href="https://github.com/D4Vinci/Scrapling" target="_blank" rel="noreferrer">Scrapling</a> / <a href="https://playwright.dev/" target="_blank" rel="noreferrer">Playwright</a> / <a href="https://camoufox.com/" target="_blank" rel="noreferrer">Camoufox</a>：普通抓取失败时的网页抓取和浏览器验证。</li>
+          </ul>
+          <div class="callout">
+            <strong>这台 Codex 里已经装好 Exa / Tavily / Brave MCP</strong>
+            不需要重复安装。课堂里重点记住：Tavily 适合作为 Agent 默认搜索流水线，Exa 适合语义研究和相似内容，Brave 适合广覆盖和第二搜索源校验。
+          </div>
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th>场景</th>
+                <th>推荐</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>AI Agent 默认联网搜索</td>
+                <td>Tavily</td>
+              </tr>
+              <tr>
+                <td>找代码文档、实现例子、语义相关资料</td>
+                <td>Exa</td>
+              </tr>
+              <tr>
+                <td>需要更广的网页、新闻、图片、视频、本地结果</td>
+                <td>Brave</td>
+              </tr>
+              <tr>
+                <td>深度调研，需要多源交叉验证</td>
+                <td>Tavily + Brave + Exa</td>
+              </tr>
+              <tr>
+                <td>RAG 获取网页正文</td>
+                <td>Tavily Extract/Crawl 或 Brave LLM Context</td>
+              </tr>
+              <tr>
+                <td>找“像这个网页一样”的内容</td>
+                <td>Exa</td>
+              </tr>
+            </tbody>
+          </table>
+          <ul class="bullet-list">
+            <li>API Key: <a href="https://app.tavily.com" target="_blank" rel="noreferrer">Tavily</a> / <a href="https://dashboard.exa.ai/api-keys" target="_blank" rel="noreferrer">Exa</a> / <a href="https://api-dashboard.search.brave.com" target="_blank" rel="noreferrer">Brave</a></li>
           </ul>
         </div>
       </article>
