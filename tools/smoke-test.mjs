@@ -13,6 +13,8 @@ function assert(condition, message) {
 
 const expectedOrder = [
   'id="research"',
+  'id="search"',
+  'id="wechat"',
   'id="clarify"',
   'id="autodev"',
   'id="frontend"',
@@ -30,6 +32,19 @@ for (const label of expectedOrder) {
 
 const requiredLinks = [
   "https://github.com/wangjialiang678/research-workflow-skill",
+  "https://www.tavily.com/",
+  "https://brave.com/search/api/",
+  "https://exa.ai/",
+  "https://cli.github.com/manual/gh_search_repos",
+  "https://docs.github.com/en/search-github/searching-on-github/searching-for-repositories",
+  "https://context7.com/",
+  "https://gitmcp.io/",
+  "https://github.com/D4Vinci/Scrapling",
+  "https://playwright.dev/",
+  "https://camoufox.com/",
+  "https://github.com/wangjialiang678/wechat-article-extractor-skill",
+  "https://github.com/jackwener/wechat-article-to-markdown",
+  "https://github.com/wangjialiang678/requirement-discovery-skill",
   "https://github.com/wangjialiang678/claude-auto-dev",
   "https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design",
   "https://github.com/anthropics/claude-cookbooks/blob/main/coding/prompting_for_frontend_aesthetics.ipynb",
@@ -39,6 +54,21 @@ const requiredLinks = [
 
 for (const link of requiredLinks) {
   assert(html.includes(`href="${link}"`), `Missing clickable link: ${link}`);
+}
+
+const copyableLinks = [
+  "https://github.com/wangjialiang678/research-workflow-skill",
+  "https://github.com/wangjialiang678/wechat-article-extractor-skill",
+  "https://github.com/jackwener/wechat-article-to-markdown",
+  "https://github.com/wangjialiang678/requirement-discovery-skill",
+  "https://github.com/wangjialiang678/claude-auto-dev",
+  "https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design",
+  "https://github.com/anthropics/claude-cookbooks/blob/main/coding/prompting_for_frontend_aesthetics.ipynb",
+  "https://github.com/garrytan/gstack",
+  "https://github.com/obra/superpowers",
+];
+
+for (const link of copyableLinks) {
   assert(html.includes(`data-copy="${link}"`), `Missing copy button for: ${link}`);
 }
 

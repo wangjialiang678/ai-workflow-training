@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AI 工作流训练营 | 从想法到可交付产品</title>
-  <meta name="description" content="给微光黑客松与超脑学员的 AI 工作流学习页：调研、需求澄清、Auto-Dev、Frontend Design、GStack、Superpowers。">
+  <meta name="description" content="给微光黑客松与超脑学员的 AI 工作流学习页：调研、AI 搜索、公众号文章下载、需求澄清、Auto-Dev、Frontend Design、GStack、Superpowers。">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23181715'/%3E%3Cpath d='M10 10h22v22H10z' fill='%23d84f36'/%3E%3Cpath d='M32 32h22v22H32z' fill='%23215fb8'/%3E%3Cpath d='M10 42h12v12H10z' fill='%23e4ad34'/%3E%3C/svg%3E">
   <style>
     :root {
@@ -589,6 +589,8 @@
       </a>
       <nav class="nav" aria-label="页面导航">
         <a href="#research">调研</a>
+        <a href="#search">AI 搜索</a>
+        <a href="#wechat">公众号</a>
         <a href="#clarify">需求澄清</a>
         <a href="#autodev">Auto-Dev</a>
         <a href="#frontend">Frontend Design</a>
@@ -602,7 +604,7 @@
       <div>
         <p class="eyebrow">For Hackathon Builders</p>
         <h1>把 AI 放进一条可靠的研发流程</h1>
-        <p class="hero-lede">这是一份给学员看的 AI 工作流地图：先调研，再澄清需求，然后进入闭环开发和前端设计，最后参考成熟的第三方工作流扩展自己的系统。</p>
+        <p class="hero-lede">这是一份给学员看的 AI 工作流地图：先调研，再用合适的搜索工具补齐证据，把中文公众号内容纳入材料库，然后澄清需求、闭环开发和设计界面。</p>
         <div class="hero-actions">
           <a class="button" href="#learning-path">看学习顺序</a>
           <a class="button secondary" href="#resources">复制安装链接</a>
@@ -647,7 +649,7 @@
     <section class="section" id="learning-path" data-testid="learning-path">
       <div class="section-head">
         <h2>学员应该按这个顺序练</h2>
-        <p class="section-note">不要从“让 AI 写代码”开始。真正可复用的能力，是把想法变成证据、需求、实现和验证。</p>
+        <p class="section-note">不要从“让 AI 写代码”开始。真正可复用的能力，是把想法变成证据、需求、实现、界面和验证。</p>
       </div>
       <div class="path-grid">
         <article class="path-step">
@@ -657,18 +659,33 @@
         </article>
         <article class="path-step">
           <span class="path-kicker">Step 2</span>
+          <h3>AI 搜索工具箱</h3>
+          <p>知道 Tavily、Brave、Exa、GitHub、Context7/GitMCP 分别适合查什么。</p>
+        </article>
+        <article class="path-step">
+          <span class="path-kicker">Step 3</span>
+          <h3>公众号文章下载 skill</h3>
+          <p>用 wechat-article-extractor 把中文生态里的公众号文章纳入调研材料。</p>
+        </article>
+        <article class="path-step">
+          <span class="path-kicker">Step 4</span>
           <h3>需求澄清</h3>
           <p>把模糊 idea 变成 PRD：用户、场景、边界、验收标准都要说清楚。</p>
         </article>
         <article class="path-step">
-          <span class="path-kicker">Step 3</span>
+          <span class="path-kicker">Step 5</span>
           <h3>Auto-Dev</h3>
           <p>用 PRD 驱动闭环开发：拆任务、并行实现、跑测试、失败后修复。</p>
         </article>
         <article class="path-step">
-          <span class="path-kicker">Step 4</span>
+          <span class="path-kicker">Step 6</span>
           <h3>Frontend Design</h3>
           <p>把产品界面做得能被人使用、愿意展示，而不是只停留在功能可用。</p>
+        </article>
+        <article class="path-step">
+          <span class="path-kicker">Step 7</span>
+          <h3>GStack / Superpowers</h3>
+          <p>最后再借鉴成熟工作流里的工程纪律和角色分工。</p>
         </article>
       </div>
     </section>
@@ -702,9 +719,55 @@
         </div>
       </article>
 
-      <article class="module" id="clarify">
+      <article class="module" id="search">
         <div>
           <span class="module-number">02</span>
+          <h3>AI 搜索工具箱</h3>
+          <p class="module-summary">调研不是只用一个搜索引擎。不同工具适合不同任务，组合使用能减少遗漏。</p>
+        </div>
+        <div class="module-body">
+          <ul class="bullet-list">
+            <li><a href="https://www.tavily.com/" target="_blank" rel="noreferrer">Tavily</a>：最新信息、实时网页、近期动态。</li>
+            <li><a href="https://brave.com/search/api/" target="_blank" rel="noreferrer">Brave Search API</a>：广覆盖网页搜索、交叉验证、补充来源。</li>
+            <li><a href="https://exa.ai/" target="_blank" rel="noreferrer">Exa</a>：语义搜索、相似产品、替代方案和高质量内容。</li>
+            <li><a href="https://cli.github.com/manual/gh_search_repos" target="_blank" rel="noreferrer">GitHub CLI</a> / <a href="https://docs.github.com/en/search-github/searching-on-github/searching-for-repositories" target="_blank" rel="noreferrer">GitHub Search</a>：开源项目、Stars、维护状态、License。</li>
+            <li><a href="https://context7.com/" target="_blank" rel="noreferrer">Context7</a> / <a href="https://gitmcp.io/" target="_blank" rel="noreferrer">GitMCP</a>：官方文档、库用法和版本差异。</li>
+            <li><a href="https://github.com/D4Vinci/Scrapling" target="_blank" rel="noreferrer">Scrapling</a> / <a href="https://playwright.dev/" target="_blank" rel="noreferrer">Playwright</a> / <a href="https://camoufox.com/" target="_blank" rel="noreferrer">Camoufox</a>：普通抓取失败时的网页抓取和浏览器验证。</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="module" id="wechat">
+        <div>
+          <span class="module-number">03</span>
+          <h3>微信公众号文章下载 skill</h3>
+          <p class="module-summary">中文实践经验经常藏在公众号文章里。用本地 skill 把公开文章转成 Markdown，方便后续总结、引用和比对。</p>
+        </div>
+        <div class="module-body">
+          <div class="callout">
+            <strong>两个名字不要混淆</strong>
+            wechat-article-extractor 是 Agent skill / 工作流层；wechat-article-to-markdown 是底层 Markdown 下载器。
+          </div>
+          <ul class="bullet-list">
+            <li>先搜索候选文章，拿到标题、公众号名、日期和摘要。</li>
+            <li>再用标题和公众号名寻找真实的 mp.weixin.qq.com 链接。</li>
+            <li>下载后检查 Markdown 是否完整、图片是否保存、批量任务是否需要生成索引。</li>
+            <li>遇到验证码或反爬信号要暂停，不做高频爬虫。</li>
+          </ul>
+          <div class="resource-row">
+            <a class="resource-link" href="https://github.com/wangjialiang678/wechat-article-extractor-skill" target="_blank" rel="noreferrer">wechat-article-extractor</a>
+            <button class="copy-btn" data-copy="https://github.com/wangjialiang678/wechat-article-extractor-skill">Copy</button>
+          </div>
+          <div class="resource-row">
+            <a class="resource-link" href="https://github.com/jackwener/wechat-article-to-markdown" target="_blank" rel="noreferrer">wechat-article-to-markdown</a>
+            <button class="copy-btn" data-copy="https://github.com/jackwener/wechat-article-to-markdown">Copy</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="module" id="clarify">
+        <div>
+          <span class="module-number">04</span>
           <h3>需求澄清</h3>
           <p class="module-summary">不要把一句 idea 直接交给 AI 写代码。先让 AI 追问，直到能产出 PRD 或技术说明。</p>
         </div>
@@ -722,12 +785,16 @@
             <span class="copy-text">你是我的产品合伙人。请不要直接给方案，先连续追问，帮我澄清目标用户、真实场景、核心问题、非目标、验收标准和技术约束；当信息足够后，再输出一版 PRD。</span>
             <button class="copy-btn" data-copy="你是我的产品合伙人。请不要直接给方案，先连续追问，帮我澄清目标用户、真实场景、核心问题、非目标、验收标准和技术约束；当信息足够后，再输出一版 PRD。">Copy</button>
           </div>
+          <div class="resource-row">
+            <a class="resource-link" href="https://github.com/wangjialiang678/requirement-discovery-skill" target="_blank" rel="noreferrer">Requirement Discovery Skill</a>
+            <button class="copy-btn" data-copy="https://github.com/wangjialiang678/requirement-discovery-skill">Copy</button>
+          </div>
         </div>
       </article>
 
       <article class="module" id="autodev">
         <div>
-          <span class="module-number">03</span>
+          <span class="module-number">05</span>
           <h3>Auto-Dev</h3>
           <p class="module-summary">把 PRD 交给工作流，而不是交给一句泛泛的“帮我实现”。它会拆任务、隔离开发、验证和修复。</p>
         </div>
@@ -754,7 +821,7 @@
 
       <article class="module" id="frontend">
         <div>
-          <span class="module-number">04</span>
+          <span class="module-number">06</span>
           <h3>Frontend Design</h3>
           <p class="module-summary">让 AI 在写页面前先选择明确的视觉方向，减少普通模板感，做出能展示的产品界面。</p>
         </div>
@@ -824,7 +891,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <span>AI Workflow Camp</span>
-      <span>Research -> Clarify -> Build -> Design -> Improve</span>
+      <span>Research -> Search -> Archive -> Clarify -> Build -> Design</span>
     </div>
   </footer>
 
